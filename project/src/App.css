@@ -2,6 +2,8 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  min-height: 500px;
 }
 
 .App {
@@ -10,7 +12,12 @@ body {
   background-color: #fffcf8;
 }
 
+.header {
+  height: 10%;
+}
+
 .App .Content {
   padding-top: 8vh;
   text-align: center;
+  height: 90%;
 }

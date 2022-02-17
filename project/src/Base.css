@@ -2,6 +2,7 @@
     display: grid;
     grid-area: div;
     grid-template-columns: 40% 60%;
+    height: 100%;
 }
 
 .LeftSideContent, .RightSideContent {
@@ -9,5 +10,74 @@
     background-color: #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    height: 90vh;
+    height: 100%;
+    overflow: scroll;
+}
+
+.LeftSideContent {
+    margin-right: 5px;
+}
+
+.RightSideContent {
+    margin-left: 5px;
+}
+
+.LeftItemsList, .RightItemsList {
+    margin: 10px 20px;
+    overflow: scroll;
+}
+
+.LeftItem {
+    margin: 5px 0px;
+    padding: 15px 0px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    font-size: 16pt;
+    border-radius: 3px;
+}
+
+.LeftItem:hover {
+    transform: scaleY(1.3);
+    transform: scaleX(1.03);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.RightContentHeader {
+    padding: 15px 0px;
+    font-size: 16pt;
+}
+
+.RightContentHeader {
+    padding: 15px 0px;
+    font-size: 16pt;
+}
+
+.RightItem {
+    display: grid;
+    grid-area: RightItem;
+    grid-template-columns: 10% 30% 30% 30%;
+    margin: 5px 0px;
+    padding: 15px 0px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    font-size: 16pt;
+    border-radius: 3px;
+}
+
+.RightItem:hover {
+    transform: scaleY(1.3);
+    transform: scaleX(1.03);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.Actions {
+
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.Action {
+    margin: 10px;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
