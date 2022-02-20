@@ -1,14 +1,18 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import "../Base.css"
-import {companies, events, mapping, students} from "../data";
+import {companiesG, eventsG, mappingG, studentsG} from "../data";
+import Actions from "../actions/Actions";
+import {CompaniesContext} from "../App";
 
 function Companies() {
     const [currentCompany, setCompanyId] = useState(1);
+    const companies = useContext(CompaniesContext);
 
     return (
         <div className="RootContent">
             <div className='LeftSideContent'>
-                <h1>Contacts page left</h1>
+                <Actions/>
+
                 <div className='LeftItemsList'>
                     {
                         companies.map(company => {
@@ -25,12 +29,12 @@ function Companies() {
                 <hr/>
                 <div className='RightItemsList'>
                     {
-                        mapping.filter((item) => item.companyId === currentCompany).map(item => {
+                        mappingG.filter((item) => item.companyId === currentCompany).map(item => {
                             return <div className='RightItem'>
                                 <div>{item.id}</div>
                                 <div>{item.date}</div>
-                                <div>{students.find(x => x.id === item.studentId).name} {students.find(x => x.id === item.studentId).surname}</div>
-                                <div>{events.find(x => x.id === item.eventId).type}</div>
+                                <div>{studentsG.find(x => x.id === item.studentId).name} {studentsG.find(x => x.id === item.studentId).surname}</div>
+                                <div>{eventsG.find(x => x.id === item.eventId).type}</div>
                             </div>
                         })
                     }
