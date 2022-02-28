@@ -64,13 +64,13 @@
 
 .RightItem:hover {
     transform: scaleY(1.3);
-    transform: scaleX(1.03);
+    transform: scaleX(1.01);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .Actions {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(4, auto);
 }
 
 .Action {

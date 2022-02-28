@@ -1,0 +1,15 @@
+#EventsRootContent {
+    grid-template-columns: 100%;
+}
+
+#EventsContent {
+    padding: 10px;
+}
+
+.Actions {
+    padding: 10px;
+}
+
+#EventsRightItem {
+    grid-template-columns: 30% 30% 40%;
+}

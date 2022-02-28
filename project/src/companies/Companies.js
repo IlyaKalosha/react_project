@@ -1,28 +1,32 @@
 import React, {useContext, useState} from "react";
 import "../Base.css"
-import {eventsG, mappingG, studentsG} from "../data";
 import Actions from "../actions/Actions";
-import {CompaniesContext} from "../App";
+import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "../App";
 import AddCompany from "./AddCompany";
 import EditCompany from "./EditCompany";
 
-function Companies({setAction}) {
+function Companies(props) {
+    const students = useContext(StudentsContext);
     const companies = useContext(CompaniesContext);
+    const events = useContext(EventsContext);
+    const mapping = useContext(MappingContext);
+
+
     const [currentCompany, setCompanyId] = useState(companies[0]?.id);
 
     return (
         <div className="RootContent">
             <div className='LeftSideContent'>
-                <Actions type={'comp'} currentItemId={currentCompany} setAction={setAction} nextId={setCompanyId}/>
+                <Actions type={'comp'} currentItemId={currentCompany} setAction={props.setAction} nextId={setCompanyId}/>
 
-                <AddCompany nextId={setCompanyId} setAction={setAction}/>
-                <EditCompany currentItemId={currentCompany} nextId={setCompanyId} setAction={setAction}/>
+                <AddCompany nextId={setCompanyId} setAction={props.setAction}/>
+                <EditCompany currentItemId={currentCompany} nextId={setCompanyId} setAction={props.setAction}/>
 
 
                 <div className='LeftItemsList'>
                     {
-                        companies.map(company => {
-                            return <div key={company.id} className='LeftItem'
+                        companies.map((company, i) => {
+                            return <div key={i} className='LeftItem'
                                         onClick={() => setCompanyId(company.id)}>{company.name}</div>
                         })
                     }
@@ -35,12 +39,12 @@ function Companies({setAction}) {
                 <hr/>
                 <div className='RightItemsList'>
                     {
-                        mappingG.filter((item) => item.companyId === currentCompany).map(item => {
+                        mapping.filter((item) => item.companyId === currentCompany).map(item => {
                             return <div className='RightItem'>
                                 <div>{item.id}</div>
                                 <div>{item.date}</div>
-                                <div>{studentsG.find(x => x.id === item.studentId).name} {studentsG.find(x => x.id === item.studentId).surname}</div>
-                                <div>{eventsG.find(x => x.id === item.eventId).type}</div>
+                                <div>{students.find(x => x.id === item.studentId).name} {students.find(x => x.id === item.studentId).surname}</div>
+                                <div>{events.find(x => x.id === item.eventId).type}</div>
                             </div>
                         })
                     }

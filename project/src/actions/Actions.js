@@ -57,6 +57,7 @@ function Actions(props) {
             </button>
             <button className='Action' onClick={() => update()}>Edit</button>
             <button className='Action' onClick={() => remove()}>Delete</button>
+            <button className='Action'>Filters</button>
         </div>
     );
 }
