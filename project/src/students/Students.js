@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
 import "../Base.css"
-import "./Students.css"
 import {companiesG, eventsG, mappingG} from '../data'
 import Actions from "../actions/Actions";
 import {StudentsContext} from "../App";
@@ -17,21 +16,21 @@ function Students({setAction}) {
             <div className='LeftSideContent'>
                 <Actions type={'stud'} currentItemId={currentStudent} setAction={setAction} nextId={setStudentId}/>
 
-                <AddStudent/>
-                <EditStudent/>
+                <AddStudent nextId={setStudentId} setAction={setAction}/>
+                <EditStudent currentItemId={currentStudent} nextId={setStudentId} setAction={setAction}/>
 
                 <div className='LeftItemsList'>
                     {
                         students.map((student, i) => {
                             return <div key={i} className='LeftItem'
-                                        onClick={() => setStudentId(student.id)}>{student.name} {student.surname}</div>
+                                        onClick={() => setStudentId(student.id)}>{student.name}</div>
                         })
                     }
                 </div>
             </div>
             <div className='RightSideContent'>
                 <div
-                    className='RightContentHeader'>{currentStudent} {students.find(x => x.id === currentStudent)?.name} {students.find(x => x.id === currentStudent)?.surname} подробно
+                    className='RightContentHeader'>{currentStudent} {students.find(x => x.id === currentStudent)?.name} подробно
                 </div>
                 <hr/>
                 <div className='RightItemsList'>

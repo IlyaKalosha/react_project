@@ -29,7 +29,8 @@ function App() {
                         <CompaniesContext.Provider value={companies}>
                             <Route exact path="/students"
                                    render={(props) => <Students {...props} setAction={setStudents}/>}/>
-                            <Route exact path="/companies" component={Companies}/>
+                            <Route exact path="/companies"
+                                   render={(props) => <Companies {...props} setAction={setCompanies}/>}/>
                             <Route exact path="/events" component={Events}/>
                             <Route exact path="/contacts" component={Contacts}/>
                             <Route exact path="/manuals" component={Manuals}/>

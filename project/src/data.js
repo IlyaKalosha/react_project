@@ -1,15 +1,15 @@
 import React from "react";
 
 export var studentsG = [
-        {id:1, name: 'ilya', surname: 'kalosha', spec: '', year: 2018, group: 2},
-        {id:2, name: 'mikhail', surname: 'kievich', spec: '', year: 2018, group: 2},
-        {id:3, name: 'vlad', surname: '', spec: '', year: 2018, group: 2},
-        {id:4, name: 'egor', surname: '', spec: '', year: 2018, group: 2},
-        {id:5, name: 'oleg', surname: '', spec: '', year: 2018, group: 2},
-        {id:6, name: 'alex', surname: '', spec: '', year: 2018, group: 2},
-        {id:7, name: 'bob', surname: '', spec: '', year: 2018, group: 2},
-        {id:8, name: 'igor', surname: '', spec: '', year: 2018, group: 2},
-        {id:9, name: 'van', surname: '', spec: '', year: 2018, group: 2}
+        {id:1, name: 'ilya kalosha', spec: '', year: 2018, group: 2},
+        {id:2, name: 'mikhail kievich', spec: '', year: 2018, group: 2},
+        {id:3, name: 'vlad ', spec: '', year: 2018, group: 2},
+        {id:4, name: 'egor ', spec: '', year: 2018, group: 2},
+        {id:5, name: 'oleg ', spec: '', year: 2018, group: 2},
+        {id:6, name: 'alex ', spec: '', year: 2018, group: 2},
+        {id:7, name: 'bob ', spec: '', year: 2018, group: 2},
+        {id:8, name: 'igor ', spec: '', year: 2018, group: 2},
+        {id:9, name: 'van ', spec: '', year: 2018, group: 2}
     ]
 
 export var eventsG = [

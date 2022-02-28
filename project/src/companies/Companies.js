@@ -1,17 +1,23 @@
 import React, {useContext, useState} from "react";
 import "../Base.css"
-import {companiesG, eventsG, mappingG, studentsG} from "../data";
+import {eventsG, mappingG, studentsG} from "../data";
 import Actions from "../actions/Actions";
 import {CompaniesContext} from "../App";
+import AddCompany from "./AddCompany";
+import EditCompany from "./EditCompany";
 
-function Companies() {
-    const [currentCompany, setCompanyId] = useState(1);
+function Companies({setAction}) {
     const companies = useContext(CompaniesContext);
+    const [currentCompany, setCompanyId] = useState(companies[0]?.id);
 
     return (
         <div className="RootContent">
             <div className='LeftSideContent'>
-                <Actions/>
+                <Actions type={'comp'} currentItemId={currentCompany} setAction={setAction} nextId={setCompanyId}/>
+
+                <AddCompany nextId={setCompanyId} setAction={setAction}/>
+                <EditCompany currentItemId={currentCompany} nextId={setCompanyId} setAction={setAction}/>
+
 
                 <div className='LeftItemsList'>
                     {
