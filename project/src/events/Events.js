@@ -6,28 +6,31 @@ import EditEvent from "./EditEvent";
 import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "../App";
 
 
-function Events({setAction}) {
+function Events(props) {
     const events = useContext(EventsContext);
     const mapping = useContext(MappingContext);
     const companies = useContext(CompaniesContext);
     const students = useContext(StudentsContext);
 
-    const [currentEvent, setEventId] = useState(mapping[0]?.id);
+    const [currentMapping, setMappingId] = useState(mapping[0]?.id);
 
     return (
         <div className="RootContent" id="EventsRootContent">
             <div className='RightSideContent' id='EventsContent'>
-                <Actions type={'stud'} currentItemId={currentEvent} setAction={setAction} nextId={setEventId}/>
-                <AddEvent nextId={setEventId} setAction={setAction}/>
-                <EditEvent currentItemId={currentEvent} nextId={setEventId} setAction={setAction}/>
-
+                <Actions type={'event'} currentItemId={currentMapping} setMapping={props.setMapping}
+                         setMappingId={setMappingId}/>
+                <AddEvent setMapping={props.setMapping} setMappingId={setMappingId}/>
+                <EditEvent currentItemId={currentMapping} setMapping={props.setMapping}/>
+                <hr/>
                 <div className='RightItemsList'>
                     {
-                        mapping.map((item, i) => {
-                            return <div key={i} className='RightItem' id='EventsRightItem'>
+                        mapping.map((item) => {
+                            return <div key={item.id} className='RightItem' id='EventsRightItem'
+                                        onClick={() => setMappingId(item.id)}>
                                 <div>Событие {item.id}</div>
-                                <div>Компания {companies.find(c => c.id === item.companyId).name}</div>
-                                <div>{students.find(x => x.id === item.studentId).name}</div>
+                                <div>{events.find(e => e.id === item.eventId)?.type}</div>
+                                <div>Компания {companies.find(c => c.id === item.companyId)?.name}</div>
+                                <div>{students.find(x => x.id === item.studentId)?.name}</div>
                             </div>
                         })
                     }

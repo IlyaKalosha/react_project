@@ -17,15 +17,15 @@ function AddCompany(props) {
         name.value = '';
 
         console.log(newCompany);
-        const id = list.push(newCompany);
-        props.nextId(id);
-        props.setAction(list);
+        let id = list.push(newCompany);
+        props.setCompanies(list);
+        props.setCompanyId(id);
         document.getElementsByClassName('AddRoot')[0].style.display = 'none';
     }
 
     return (
         <div className='AddRoot'>
-            <h5>Новый</h5>
+            <h5>Новая</h5>
             <div className='AddGrid'>
                 <div>
                     <p>Имя компании</p>

@@ -11,12 +11,11 @@ function AddStudent(props) {
         const year = document.getElementsByClassName('Year')[0];
         const group = document.getElementsByClassName('Group')[0];
         const selectSpec = document.getElementsByClassName('Spec')[0];
-        const spec = selectSpec.options[selectSpec.selectedIndex];
 
         const newStudent = {
             id: students.length + 1,
             name: name.value,
-            spec: spec.value,
+            spec: selectSpec.selectedIndex + 1,
             year: year.value,
             group: group.value
         };
@@ -27,9 +26,10 @@ function AddStudent(props) {
         selectSpec.selectedIndex = 0;
 
         console.log(newStudent);
-        const id = list.push(newStudent);
-        props.nextId(id);
-        props.setAction(list);
+
+        let id = list.push(newStudent);
+        props.setStudents(list);
+        props.setStudentId(id);
         document.getElementsByClassName('AddRoot')[0].style.display = 'none';
     }
 

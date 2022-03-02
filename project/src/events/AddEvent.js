@@ -1,58 +1,55 @@
 import React, {useContext} from "react";
 import '../Base.css'
-import {StudentsContext} from "../App";
+import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "../App";
 
 function Add(props) {
+    const mappings = useContext(MappingContext);
     const students = useContext(StudentsContext);
+    const companies = useContext(CompaniesContext);
+    const events = useContext(EventsContext);
 
     function Add() {
-        const list = students;
-        const name = document.getElementsByClassName('Name')[0];
-        const year = document.getElementsByClassName('Year')[0];
-        const group = document.getElementsByClassName('Group')[0];
-        const selectSpec = document.getElementsByClassName('Spec')[0];
-        const spec = selectSpec.options[selectSpec.selectedIndex];
+        const list = mappings;
+        const eventSelect = document.getElementsByClassName('eventSelect')[0];
+        const companySelect = document.getElementsByClassName('companySelect')[0];
+        const studentSelect = document.getElementsByClassName('studentSelect')[0];
+        const event = eventSelect.options[eventSelect.selectedIndex];
+        const company = companySelect.options[companySelect.selectedIndex];
+        const student = studentSelect.options[studentSelect.selectedIndex];
 
-        const newStudent = {
-            id: students.length + 1,
-            name: name.value,
-            spec: spec.value,
-            year: year.value,
-            group: group.value
+        console.log(list.length);
+
+        const newMapping = {
+            id: mappings.length + 1,
+            studentId: students.find(s => s.name === student.value).id,
+            companyId: companies.find(c => c.name === company.value).id,
+            eventId: events.find(e => e.type === event.value).id
         };
 
-        name.value = '';
-        year.value = '';
-        group.value = '';
-        selectSpec.selectedIndex = 0;
+        eventSelect.selectedIndex = 0;
+        companySelect.selectedIndex = 0;
+        studentSelect.selectedIndex = 0;
 
-        console.log(newStudent);
-        const id = list.push(newStudent);
-        props.nextId(id);
-        props.setAction(list);
+        console.log(newMapping);
+        let id = list.push(newMapping);
+        props.setMapping(list);
+        props.setMappingId(id);
         document.getElementsByClassName('AddRoot')[0].style.display = 'none';
     }
 
     return (
         <div className='AddRoot'>
-            <h5>Новый</h5>
+            <h5>Новое</h5>
             <div className='AddGrid'>
                 <div>
-                    <p>Имя</p>
-                    <p>Специальность</p>
-                    <p>Год поступления</p>
-                    <p>Группа</p>
+                    <p>Тип события</p>
+                    <p>Компания</p>
+                    <p>Студент</p>
                 </div>
                 <div>
-                    <input className='Name' type='text' placeholder='Имя фамилия'/>
-                    <select className='Spec'>
-                        <option value='ИСиТ'>ИСиТ</option>
-                        <option value='ПОИТ'>ПОИТ</option>
-                        <option value='ДЭЙВИ'>ДЭЙВИ</option>
-                        <option value='ПОИБМС'>ПОИБМС</option>
-                    </select>
-                    <input className='Year' type='text' placeholder='Год поступления'/>
-                    <input className='Group' type='text' placeholder='Группа'/>
+                    <select className='eventSelect'/>
+                    <select className='companySelect'/>
+                    <select className='studentSelect'/>
                 </div>
             </div>
             <div className='AddButtons'>

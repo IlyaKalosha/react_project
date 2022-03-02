@@ -36,11 +36,13 @@ function App() {
                             <EventsContext.Provider value={events}>
                                 <MappingContext.Provider value={mapping}>
                                     <Route exact path="/students"
-                                           render={(props) => <Students {...props} setAction={setStudents}/>}/>
+                                           render={(props) => <Students {...props} setStudents={setStudents}
+                                                                        setMapping={setMapping}/>}/>
                                     <Route exact path="/companies"
-                                           render={(props) => <Companies {...props} setAction={setCompanies}/>}/>
+                                           render={(props) => <Companies {...props} setCompanies={setCompanies}
+                                                                         setMapping={setMapping}/>}/>
                                     <Route exact path="/events"
-                                           render={(props) => <Events {...props} setAction={setEvents}/>}/>
+                                           render={(props) => <Events {...props} setMapping={setMapping}/>}/>
                                     <Route exact path="/contacts" component={Contacts}/>
                                     <Route exact path="/manuals" component={Manuals}/>
                                     <Route path="/" component={Students}/>

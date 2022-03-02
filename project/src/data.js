@@ -1,16 +1,23 @@
 import React from "react";
 
 export var studentsG = [
-        {id:1, name: 'ilya kalosha', spec: '', year: 2018, group: 2},
-        {id:2, name: 'mikhail kievich', spec: '', year: 2018, group: 2},
-        {id:3, name: 'vlad ', spec: '', year: 2018, group: 2},
-        {id:4, name: 'egor ', spec: '', year: 2018, group: 2},
-        {id:5, name: 'oleg ', spec: '', year: 2018, group: 2},
-        {id:6, name: 'alex ', spec: '', year: 2018, group: 2},
-        {id:7, name: 'bob ', spec: '', year: 2018, group: 2},
-        {id:8, name: 'igor ', spec: '', year: 2018, group: 2},
-        {id:9, name: 'van ', spec: '', year: 2018, group: 2}
+        {id:1, name: 'ilya kalosha', spec: 1, year: 2018, group: 2},
+        {id:2, name: 'mikhail kievich', spec: 2, year: 2018, group: 2},
+        {id:3, name: 'vlad ', spec: 3, year: 2018, group: 2},
+        {id:4, name: 'egor ', spec: 4, year: 2018, group: 2},
+        {id:5, name: 'oleg ', spec: 1, year: 2018, group: 2},
+        {id:6, name: 'alex ', spec: 2, year: 2018, group: 2},
+        {id:7, name: 'bob ', spec: 3, year: 2018, group: 2},
+        {id:8, name: 'igor ', spec: 4, year: 2018, group: 2},
+        {id:9, name: 'van ', spec: 1, year: 2018, group: 2}
     ]
+
+export var specG = [
+        {id:1, name: 'ИСиТ'},
+        {id:2, name: 'ПОИТ'},
+        {id:3, name: 'ДЭЙВИ'},
+        {id:4, name: 'ПОИБМС'}
+]
 
 export var eventsG = [
         {id:1, type: 'курсы'},
@@ -29,14 +36,14 @@ export var companiesG = [
 ]
 
 export var mappingG = [
-        {id: 1, studentId: 1, date: '28.11.2020', companyId: 1, eventId: 1},
-        {id: 2, studentId: 2, date: '28.11.2020', companyId: 2, eventId: 2},
-        {id: 3, studentId: 3, date: '28.11.2020', companyId: 3, eventId: 3},
-        {id: 4, studentId: 4, date: '28.11.2020', companyId: 4, eventId: 4},
-        {id: 5, studentId: 5, date: '28.11.2020', companyId: 5, eventId: 5},
-        {id: 7, studentId: 1, date: '28.11.2020', companyId: 2, eventId: 1},
-        {id: 8, studentId: 1, date: '28.11.2020', companyId: 3, eventId: 2},
-        {id: 9, studentId: 1, date: '28.11.2020', companyId: 4, eventId: 3}
+        {id: 1, studentId: 1, companyId: 1, eventId: 1},
+        {id: 2, studentId: 2, companyId: 2, eventId: 2},
+        {id: 3, studentId: 3, companyId: 3, eventId: 3},
+        {id: 4, studentId: 4, companyId: 4, eventId: 4},
+        {id: 5, studentId: 5, companyId: 5, eventId: 5},
+        {id: 6, studentId: 1, companyId: 2, eventId: 1},
+        {id: 7, studentId: 1, companyId: 3, eventId: 2},
+        {id: 8, studentId: 1, companyId: 4, eventId: 3}
 ]
 
 

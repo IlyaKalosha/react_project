@@ -2,8 +2,11 @@ import React, {useContext, useState} from "react";
 import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "../App";
 
 
-function Actions(props) {
-    const [filterState, setSelected] = useState(0);
+function FilterStudents(props) {
+    const [filterName, setNameSelected] = useState(1);
+    const [filterYear, setYearSelected] = useState(0);
+    const [filterProf, setProfSelected] = useState(0);
+
 
     const students = useContext(StudentsContext);
     const companies = useContext(CompaniesContext);
@@ -52,11 +55,12 @@ function Actions(props) {
             const year = document.getElementsByClassName('Year')[1];
             const group = document.getElementsByClassName('Group')[1];
             const selectSpec = document.getElementsByClassName('Spec')[1];
+            const spec = selectSpec.options[selectSpec.selectedIndex];
 
             name.value = students.find(item => item.id === props.currentItemId).name;
             year.value = students.find(item => item.id === props.currentItemId).year;
+            spec.value = students.find(item => item.id === props.currentItemId).spec;
             group.value = students.find(item => item.id === props.currentItemId).group;
-            selectSpec.selectedIndex = students.find(s => s.id === props.currentItemId).spec - 1;
 
             document.getElementsByClassName('EditRoot')[0].style.display = 'grid'
         }
@@ -67,37 +71,6 @@ function Actions(props) {
 
             document.getElementsByClassName('EditRoot')[0].style.display = 'grid'
         }
-        if (props.type === 'event') {
-            document.getElementsByClassName('EditRoot')[0].style.display = 'grid';
-            var eventSelect = document.getElementsByClassName('eventSelect')[1];
-            eventSelect.innerHTML = '';
-            for (var i = 0; i < events.length; i++) {
-                var el = document.createElement("option");
-                el.textContent = events[i].type;
-                el.value = events[i].type;
-                eventSelect.appendChild(el);
-            }
-            var companySelect = document.getElementsByClassName('companySelect')[1];
-            companySelect.innerHTML = '';
-            for (var i = 0; i < companies.length; i++) {
-                var el = document.createElement("option");
-                el.textContent = companies[i].name;
-                el.value = companies[i].name;
-                companySelect.appendChild(el);
-            }
-            var studentSelect = document.getElementsByClassName('studentSelect')[1];
-            studentSelect.innerHTML = '';
-            for (var i = 0; i < students.length; i++) {
-                var el = document.createElement("option");
-                el.textContent = students[i].name;
-                el.value = students[i].name;
-                studentSelect.appendChild(el);
-            }
-
-            eventSelect.selectedIndex = mappings.find(m => m.id === props.currentItemId).eventId - 1;
-            companySelect.selectedIndex = mappings.find(m => m.id === props.currentItemId).companyId - 1;
-            studentSelect.selectedIndex = mappings.find(m => m.id === props.currentItemId).studentId - 1;
-        }
     }
 
     function remove() {
@@ -105,56 +78,69 @@ function Actions(props) {
             const list = students;
             const newList = list.filter(item => item.id !== props.currentItemId);
             props.setStudents(newList);
-
-            props.setStudentId(newList[0].id);
-
-            const list2 = mappings;
-            const newList2 = list2.filter(item => item.studentId !== props.currentItemId);
-            props.setMapping(newList2);
         }
         if (props.type === 'comp') {
             const list = companies;
             const newList = list.filter(item => item.id !== props.currentItemId);
             props.setCompanies(newList);
-
-            props.setCompanyId(newList[0].id);
-
-            const list2 = mappings;
-            const newList2 = list2.filter(item => item.companyId !== props.currentItemId);
-            props.setMapping(newList2);
         }
         if (props.type === 'event') {
             const list = mappings;
             const newList = list.filter(item => item.id !== props.currentItemId);
             props.setMapping(newList);
-            props.setMappingId(newList[0].id);
         }
-    }
-
-    function filter() {
-        if (filterState) {
-            setSelected(0);
-            document.getElementsByClassName('FilterStudents')[0].style.display = 'grid';
-        } else {
-            setSelected(1);
-            document.getElementsByClassName('FilterStudents')[0].style.display = 'None';
-        }
-    }
-
-    function disableFilter() {
-        document.getElementById('filterButton').style.display='none';
-        document.getElementsByClassName('Actions')[0].style.gridTemplateColumns="repeat(3, auto)";
     }
 
     return (
-        <div className='Actions'>
-            <button className='Action' onClick={() => add()}>Add
+        <div className='FilterStudents'>
+            <button className='Action' onClick={() => {
+                setNameSelected(1);
+                setYearSelected(0);
+                setProfSelected(0);
+            }}>Имя
             </button>
-            <button className='Action' onClick={() => update()}>Edit</button>
-            <button className='Action' onClick={() => remove()}>Delete</button>
-            <button className='Action' id='filterButton' onClick={() => filter()}>Filters</button>
+            <button className='Action' onClick={() => {
+                setYearSelected(1);
+                setNameSelected(0);
+                setProfSelected(0);
+            }}>Год поступления
+            </button>
+            <button className='Action' onClick={() => {
+                setYearSelected(0);
+                setNameSelected(0);
+                setProfSelected(1);
+            }}>Специальность
+            </button>
+            {
+                filterName ? (
+                    <div className='filter'>
+                        <div className='filterInput'>
+                            <p>Имя</p>
+                            <input type='text'/>
+                        </div>
+                        <button>Отфильтровать</button>
+                    </div>
+                ) : filterYear ? (
+                        <div className='filter'>
+                            <div className='filterInput'>
+                                <p>Год поступления</p>
+                                <input type='text'/>
+                            </div>
+                            <button>Отфильтровать</button>
+                        </div>
+                    ) :
+                    (
+                        <div className='filter'>
+                            <div className='filterInput'>
+                                <p>Специальность</p>
+                                <input type='text'/>
+                            </div>
+                            <button>Отфильтровать</button>
+                        </div>
+                    )
+            }
         </div>
     );
 }
 
-export default Actions;
+export default FilterStudents;

@@ -1,5 +1,6 @@
 import React, {useContext, useState} from "react";
 import "../Base.css"
+import "./Companies.css"
 import Actions from "../actions/Actions";
 import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "../App";
 import AddCompany from "./AddCompany";
@@ -17,16 +18,17 @@ function Companies(props) {
     return (
         <div className="RootContent">
             <div className='LeftSideContent'>
-                <Actions type={'comp'} currentItemId={currentCompany} setAction={props.setAction} nextId={setCompanyId}/>
+                <Actions type={'comp'} currentItemId={currentCompany} setCompanies={props.setCompanies}
+                         setMapping={props.setMapping} setCompanyId={setCompanyId} filterVisible={0}/>
 
-                <AddCompany nextId={setCompanyId} setAction={props.setAction}/>
-                <EditCompany currentItemId={currentCompany} nextId={setCompanyId} setAction={props.setAction}/>
-
+                <AddCompany setCompanies={props.setCompanies} setCompanyId={setCompanyId}/>
+                <EditCompany currentItemId={currentCompany} setCompanies={props.setCompanies}/>
+                <hr/>
 
                 <div className='LeftItemsList'>
                     {
-                        companies.map((company, i) => {
-                            return <div key={i} className='LeftItem'
+                        companies.map(company => {
+                            return <div key={company.id} className='LeftItem'
                                         onClick={() => setCompanyId(company.id)}>{company.name}</div>
                         })
                     }
@@ -34,7 +36,7 @@ function Companies(props) {
             </div>
             <div className='RightSideContent'>
                 <div
-                    className='RightContentHeader'>Компания {companies.find(x => x.id === currentCompany).name} подробно
+                    className='RightContentHeader'>Компания {companies.find(x => x.id === currentCompany)?.name} подробно
                 </div>
                 <hr/>
                 <div className='RightItemsList'>

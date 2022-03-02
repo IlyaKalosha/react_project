@@ -1,34 +1,35 @@
 import React, {useContext} from "react";
 import '../Base.css'
-import {StudentsContext} from "../App";
+import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "../App";
 
 function EditEvent(props) {
+    const mappings = useContext(MappingContext);
     const students = useContext(StudentsContext);
+    const companies = useContext(CompaniesContext);
+    const events = useContext(EventsContext);
 
     function Edit() {
-        const list = students;
+        const list = mappings;
+        const eventSelect = document.getElementsByClassName('eventSelect')[1];
+        const companySelect = document.getElementsByClassName('companySelect')[1];
+        const studentSelect = document.getElementsByClassName('studentSelect')[1];
+        const event = eventSelect.options[eventSelect.selectedIndex];
+        const company = companySelect.options[companySelect.selectedIndex];
+        const student = studentSelect.options[studentSelect.selectedIndex];
 
-        const name = document.getElementsByClassName('Name')[1];
-        const year = document.getElementsByClassName('Year')[1];
-        const group = document.getElementsByClassName('Group')[1];
-        const selectSpec = document.getElementsByClassName('Spec')[1];
-        const spec = selectSpec.options[selectSpec.selectedIndex];
 
-
-        const updatedStudent = {
+        const updatedMapping = {
             id: props.currentItemId,
-            name: name.value,
-            spec: spec.value,
-            year: year.value,
-            group: group.value
+            studentId: students.find(s => s.name === student.value).id,
+            companyId: companies.find(c => c.name === company.value).id,
+            eventId: events.find(e => e.type === event.value).id
         };
 
         const newList = list.filter(item => item.id !== props.currentItemId);
-        newList.push(updatedStudent);
+        newList.push(updatedMapping);
         newList.sort((a1, a2) => a1.id - a2.id);
 
-        props.nextId(props.currentItemId);
-        props.setAction(newList);
+        props.setMapping(newList);
 
         document.getElementsByClassName('EditRoot')[0].style.display = 'none';
     }
@@ -38,21 +39,14 @@ function EditEvent(props) {
             <h5>Изменить</h5>
             <div className='EditGrid'>
                 <div>
-                    <p>Имя</p>
-                    <p>Специальность</p>
-                    <p>Год поступления</p>
-                    <p>Группа</p>
+                    <p>Тип события</p>
+                    <p>Компания</p>
+                    <p>Студент</p>
                 </div>
                 <div>
-                    <input className='Name' type='text' placeholder='Имя фамилия'/>
-                    <select className='Spec'>
-                        <option value='ИСиТ'>ИСиТ</option>
-                        <option value='ПОИТ'>ПОИТ</option>
-                        <option value='ДЭЙВИ'>ДЭЙВИ</option>
-                        <option value='ПОИБМС'>ПОИБМС</option>
-                    </select>
-                    <input className='Year' type='text' placeholder='Год поступления'/>
-                    <input className='Group' type='text' placeholder='Группа'/>
+                    <select className='eventSelect'/>
+                    <select className='companySelect'/>
+                    <select className='studentSelect'/>
                 </div>
             </div>
             <div className='EditButtons'>

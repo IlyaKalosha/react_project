@@ -1,28 +1,33 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import "../Base.css"
-import {companiesG, eventsG, mappingG} from '../data'
 import Actions from "../actions/Actions";
-import {StudentsContext} from "../App";
+import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "../App";
 import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudent";
+import FilterStudents from "./FilterStudents";
 
 
-function Students({setAction}) {
+function Students(props) {
     const students = useContext(StudentsContext);
+    const companies = useContext(CompaniesContext);
+    const events = useContext(EventsContext);
+    const mapping = useContext(MappingContext);
+
     const [currentStudent, setStudentId] = useState(students[0]?.id);
 
     return (
         <div className="RootContent">
             <div className='LeftSideContent'>
-                <Actions type={'stud'} currentItemId={currentStudent} setAction={setAction} nextId={setStudentId}/>
-
-                <AddStudent nextId={setStudentId} setAction={setAction}/>
-                <EditStudent currentItemId={currentStudent} nextId={setStudentId} setAction={setAction}/>
-
+                <Actions type={'stud'} currentItemId={currentStudent} setStudents={props.setStudents}
+                         setMapping={props.setMapping} setStudentId={setStudentId} filterVisible={1}/>
+                <FilterStudents/>
+                <AddStudent setStudents={props.setStudents} setStudentId={setStudentId}/>
+                <EditStudent currentItemId={currentStudent} setStudents={props.setStudents}/>
+                <hr/>
                 <div className='LeftItemsList'>
                     {
-                        students.map((student, i) => {
-                            return <div key={i} className='LeftItem'
+                        students.map(student => {
+                            return <div key={student.id} className='LeftItem'
                                         onClick={() => setStudentId(student.id)}>{student.name}</div>
                         })
                     }
@@ -30,17 +35,17 @@ function Students({setAction}) {
             </div>
             <div className='RightSideContent'>
                 <div
-                    className='RightContentHeader'>{currentStudent} {students.find(x => x.id === currentStudent)?.name} подробно
+                    className='RightContentHeader'>{students.find(x => x.id === currentStudent)?.name} подробно
                 </div>
                 <hr/>
                 <div className='RightItemsList'>
                     {
-                        mappingG.filter((item) => item.studentId === currentStudent).map((item, i) => {
-                            return <div key={i} className='RightItem'>
+                        mapping.filter((item) => item.studentId === currentStudent).map((item) => {
+                            return <div key={item.id} className='RightItem'>
                                 <div>{item.id}</div>
                                 <div>{item.date}</div>
-                                <div>{companiesG.find(x => x.id === item.companyId).name}</div>
-                                <div>{eventsG.find(x => x.id === item.eventId).type}</div>
+                                <div>{companies.find(x => x.id === item.companyId).name}</div>
+                                <div>{events.find(x => x.id === item.eventId).type}</div>
                             </div>
                         })
                     }

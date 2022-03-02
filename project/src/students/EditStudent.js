@@ -27,8 +27,7 @@ function EditStudent(props) {
         newList.push(updatedStudent);
         newList.sort((a1, a2) => a1.id - a2.id);
 
-        props.nextId(props.currentItemId);
-        props.setAction(newList);
+        props.setStudents(newList);
 
         document.getElementsByClassName('EditRoot')[0].style.display = 'none';
     }
