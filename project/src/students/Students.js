@@ -20,9 +20,9 @@ function Students(props) {
             <div className='LeftSideContent'>
                 <Actions type={'stud'} currentItemId={currentStudent} setStudents={props.setStudents}
                          setMapping={props.setMapping} setStudentId={setStudentId} filterVisible={1}/>
-                <FilterStudents/>
-                <AddStudent setStudents={props.setStudents} setStudentId={setStudentId}/>
-                <EditStudent currentItemId={currentStudent} setStudents={props.setStudents}/>
+                <FilterStudents setStudentsNF={props.setStudentsNF} setStudents={props.setStudents}/>
+                <AddStudent setStudents={props.setStudents} setStudentId={setStudentId} setStudentsNF={props.setStudentsNF}/>
+                <EditStudent currentItemId={currentStudent} setStudents={props.setStudents} setStudentsNF={props.setStudentsNF}/>
                 <hr/>
                 <div className='LeftItemsList'>
                     {

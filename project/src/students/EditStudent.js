@@ -1,12 +1,14 @@
 import React, {useContext} from "react";
 import '../Base.css'
-import {StudentsContext} from "../App";
+import {StudentsContext, StudentsContextNF} from "../App";
 
 function EditStudent(props) {
     const students = useContext(StudentsContext);
+    const studentsNF = useContext(StudentsContextNF);
 
     function Edit() {
         const list = students;
+        const listNF = studentsNF;
 
         const name = document.getElementsByClassName('Name')[1];
         const year = document.getElementsByClassName('Year')[1];
@@ -27,7 +29,12 @@ function EditStudent(props) {
         newList.push(updatedStudent);
         newList.sort((a1, a2) => a1.id - a2.id);
 
+        const newListNF = listNF.filter(item => item.id !== props.currentItemId);
+        newListNF.push(updatedStudent);
+        newListNF.sort((a1, a2) => a1.id - a2.id);
+
         props.setStudents(newList);
+        props.setStudentsNF(newListNF);
 
         document.getElementsByClassName('EditRoot')[0].style.display = 'none';
     }

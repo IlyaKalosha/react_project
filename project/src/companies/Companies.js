@@ -19,10 +19,10 @@ function Companies(props) {
         <div className="RootContent">
             <div className='LeftSideContent'>
                 <Actions type={'comp'} currentItemId={currentCompany} setCompanies={props.setCompanies}
-                         setMapping={props.setMapping} setCompanyId={setCompanyId} filterVisible={0}/>
+                         setMapping={props.setMapping} setCompanyId={setCompanyId} />
 
                 <AddCompany setCompanies={props.setCompanies} setCompanyId={setCompanyId}/>
-                <EditCompany currentItemId={currentCompany} setCompanies={props.setCompanies}/>
+                <EditCompany currentItemId={currentCompany}/>
                 <hr/>
 
                 <div className='LeftItemsList'>

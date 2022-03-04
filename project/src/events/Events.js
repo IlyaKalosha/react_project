@@ -4,6 +4,7 @@ import Actions from "../actions/Actions";
 import AddEvent from "./AddEvent";
 import EditEvent from "./EditEvent";
 import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "../App";
+import FilterEvents from "./FilterEvents";
 
 
 function Events(props) {
@@ -19,6 +20,7 @@ function Events(props) {
             <div className='RightSideContent' id='EventsContent'>
                 <Actions type={'event'} currentItemId={currentMapping} setMapping={props.setMapping}
                          setMappingId={setMappingId}/>
+                <FilterEvents setMapping={props.setMapping}/>
                 <AddEvent setMapping={props.setMapping} setMappingId={setMappingId}/>
                 <EditEvent currentItemId={currentMapping} setMapping={props.setMapping}/>
                 <hr/>

@@ -1,41 +1,49 @@
 import React, {useContext, useState} from "react";
-import {StudentsContext, StudentsContextNF} from "../App";
-import {specG} from "../data";
+import {
+    CompaniesContext, EventsContext,
+    MappingContext,
+    MappingContextNF, StudentsContext
+} from "../App";
 
 
-function FilterStudents(props) {
+function FilterEvents(props) {
     const [filterName, setNameSelected] = useState(1);
     const [filterYear, setYearSelected] = useState(0);
     const [filterProf, setProfSelected] = useState(0);
 
+
+    const mapping = useContext(MappingContext);
     const students = useContext(StudentsContext);
-    const studentsNF = useContext(StudentsContextNF);
+    const companies = useContext(CompaniesContext);
+    const mappingNF = useContext(MappingContextNF);
+    const events = useContext(EventsContext);
 
     function filterByProf() {
-        const list = students;
+        const list = mapping;
         const profFilterInput = document.getElementById('profFilterInput');
-        const filteredList = list.filter(item => item.spec === specG.find(i => i.name === profFilterInput.value)?.id);
-        props.setStudents(filteredList);
+        const filteredList = list.filter(item => item.companyId === companies.find(i => i.name === profFilterInput.value)?.id);
+        props.setMapping(filteredList);
     }
 
     function filterByYear() {
-        const list = students;
-        const profFilterInput = document.getElementById('yearFilterInput');
-        const filteredList = list.filter(item => item.year === profFilterInput.value);
-        props.setStudents(filteredList);
+        const list = mapping;
+        const yearFilterInput = document.getElementById('yearFilterInput');
+        const filteredList = list.filter(item => item.eventId === events.find(i => i.type === yearFilterInput.value)?.id);
+        props.setMapping(filteredList);
     }
 
     function filterByName() {
-        const list = students;
-        const profFilterInput = document.getElementById('nameFilterInput');
-        const filteredList = list.filter(item => item.name.includes(profFilterInput.value));
-        props.setStudents(filteredList);
+        const list = mapping;
+        const nameFilterInput = document.getElementById('nameFilterInput');
+        const filteredList = list.filter(item => students.some(i => i.name.includes(nameFilterInput.value) && item.studentId === i.id));
+        props.setMapping(filteredList);
     }
 
     function filterClear() {
-        const list = studentsNF;
-        props.setStudents(list);
+        const list = mappingNF;
+        props.setMapping(list);
     }
+
 
     return (
         <div className='FilterRoot'>
@@ -43,26 +51,26 @@ function FilterStudents(props) {
                 setNameSelected(1);
                 setYearSelected(0);
                 setProfSelected(0);
-            }}>Имя
+            }}>Студент
             </button>
             <button className='Action' onClick={() => {
                 setYearSelected(1);
                 setNameSelected(0);
                 setProfSelected(0);
-            }}>Год поступления
+            }}>Событие
             </button>
             <button className='Action' onClick={() => {
                 setYearSelected(0);
                 setNameSelected(0);
                 setProfSelected(1);
-            }}>Специальность
+            }}>Компания
             </button>
             <button className='Action' onClick={() => filterClear()}>Очистить фильтры</button>
             {
                 filterName ? (
                     <div className='filter'>
                         <div className='filterInput'>
-                            <p>Имя</p>
+                            <p>Студент</p>
                             <input type='text' id='nameFilterInput'/>
                         </div>
                         <button onClick={() => filterByName()}>Отфильтровать</button>
@@ -70,7 +78,7 @@ function FilterStudents(props) {
                 ) : filterYear ? (
                         <div className='filter'>
                             <div className='filterInput'>
-                                <p>Год поступления</p>
+                                <p>Событие</p>
                                 <input type='text' id='yearFilterInput'/>
                             </div>
                             <button onClick={() => filterByYear()}>Отфильтровать</button>
@@ -79,7 +87,7 @@ function FilterStudents(props) {
                     (
                         <div className='filter'>
                             <div className='filterInput'>
-                                <p>Специальность</p>
+                                <p>Компания</p>
                                 <input type='text' id='profFilterInput'/>
                             </div>
                             <button onClick={() => filterByProf()}>Отфильтровать</button>
@@ -90,4 +98,4 @@ function FilterStudents(props) {
     );
 }
 
-export default FilterStudents;
+export default FilterEvents;

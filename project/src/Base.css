@@ -126,13 +126,13 @@
     width: 70%;
 }
 
-.FilterStudents {
+.FilterRoot {
     display: none;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(4, auto);
 }
 
 .filter {
-    grid-column: 1/4;
+    grid-column: 1/5;
     margin: 5px 10px;
     padding: 15px 0px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);

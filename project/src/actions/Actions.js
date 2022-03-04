@@ -3,7 +3,7 @@ import {CompaniesContext, EventsContext, MappingContext, StudentsContext} from "
 
 
 function Actions(props) {
-    const [filterState, setSelected] = useState(0);
+    const [filterState, setSelected] = useState(1);
 
     const students = useContext(StudentsContext);
     const companies = useContext(CompaniesContext);
@@ -133,17 +133,12 @@ function Actions(props) {
 
     function filter() {
         if (filterState) {
+            document.getElementsByClassName('FilterRoot')[0].style.display = 'grid';
             setSelected(0);
-            document.getElementsByClassName('FilterStudents')[0].style.display = 'grid';
         } else {
+            document.getElementsByClassName('FilterRoot')[0].style.display = 'None';
             setSelected(1);
-            document.getElementsByClassName('FilterStudents')[0].style.display = 'None';
         }
-    }
-
-    function disableFilter() {
-        document.getElementById('filterButton').style.display='none';
-        document.getElementsByClassName('Actions')[0].style.gridTemplateColumns="repeat(3, auto)";
     }
 
     return (

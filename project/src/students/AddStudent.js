@@ -1,19 +1,22 @@
 import React, {useContext} from "react";
 import '../Base.css'
-import {StudentsContext} from "../App";
+import {StudentsContext, StudentsContextNF} from "../App";
 
 function AddStudent(props) {
     const students = useContext(StudentsContext);
+    const studentsNF = useContext(StudentsContextNF);
 
     function Add() {
         const list = students;
+        const listNF = studentsNF;
+
         const name = document.getElementsByClassName('Name')[0];
         const year = document.getElementsByClassName('Year')[0];
         const group = document.getElementsByClassName('Group')[0];
         const selectSpec = document.getElementsByClassName('Spec')[0];
 
         const newStudent = {
-            id: students.length + 1,
+            id: studentsNF.length + 1,
             name: name.value,
             spec: selectSpec.selectedIndex + 1,
             year: year.value,
@@ -28,7 +31,9 @@ function AddStudent(props) {
         console.log(newStudent);
 
         let id = list.push(newStudent);
+        let idNF = listNF.push(newStudent);
         props.setStudents(list);
+        props.setStudentsNF(listNF);
         props.setStudentId(id);
         document.getElementsByClassName('AddRoot')[0].style.display = 'none';
     }
