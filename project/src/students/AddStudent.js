@@ -31,7 +31,7 @@ function AddStudent(props) {
         console.log(newStudent);
 
         let id = list.push(newStudent);
-        let idNF = listNF.push(newStudent);
+        // let idNF = listNF.push(newStudent);
         props.setStudents(list);
         props.setStudentsNF(listNF);
         props.setStudentId(id);
